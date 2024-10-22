@@ -23,12 +23,15 @@ func main() {
 	http.Handle("/static/", http.StripPrefix("/static/", fileServer))
 
 	http.HandleFunc("/lancement", func(w http.ResponseWriter, r *http.Request) {
+		if gameStarted {
+			http.Redirect(w, r, "/game", http.StatusSeeOther)
+		}
 		tmpl.ExecuteTemplate(w, "lancement", nil)
 	})
 
 	http.HandleFunc("/lancement/treatment", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != http.MethodPost {
-			http.Redirect(w, r, "/", http.StatusSeeOther)
+			http.Redirect(w, r, "/lancement", http.StatusSeeOther)
 			return
 		}
 
