@@ -38,8 +38,6 @@ func main() {
 		pseudo = r.FormValue("pseudo")
 		difficulty = r.FormValue("difficulty")
 
-		fmt.Print(pseudo)
-
 		validPseudo := len(pseudo) >= 1 && len(pseudo) <= 32
 
 		validDifficulty := difficulty == "1" || difficulty == "2"
@@ -49,7 +47,7 @@ func main() {
 			print("err")
 			return
 		}
-
+		gameStarted = true
 	})
 
 	// Gestion des erreurs
