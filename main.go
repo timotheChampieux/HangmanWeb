@@ -14,13 +14,14 @@ var (
 )
 
 func main() {
+	fileServer := http.FileServer(http.Dir("./assets"))
+	http.Handle("/static/", http.StripPrefix("/static/", fileServer))
+
 	tmpl, tempErr := template.ParseGlob("./templates/*.html")
 	if tempErr != nil {
 		fmt.Printf("erreur avec le temp : %v", tempErr.Error())
 		os.Exit(02)
 	}
-	fileServer := http.FileServer(http.Dir("./assets"))
-	http.Handle("/static/", http.StripPrefix("/static/", fileServer))
 
 	http.HandleFunc("/lancement", func(w http.ResponseWriter, r *http.Request) {
 		if gameStarted {
