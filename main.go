@@ -55,6 +55,6 @@ func main() {
 		tmpl.ExecuteTemplate(w, "error", nil)
 	})
 
-	fmt.Println("Serveur démarré sur http://localhost:8000/lancement")
-	http.ListenAndServe(":8000", nil)
+	fmt.Println("Serveur démarré sur http://localhost:8080/lancement")
+	http.ListenAndServe(":8080", nil)
 }
