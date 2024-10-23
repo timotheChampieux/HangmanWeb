@@ -1,0 +1,97 @@
+/* Style global pour le body */
+body {
+    font-family: 'Courier New', Courier, monospace; /* Style machine à écrire pour rappeler le côté classique du jeu du pendu */
+    background-color: #f08c8c; /* Arrière-plan couleur "papier vieilli" */
+    color: #333; /* Couleur sombre pour le texte */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container pour styliser le contenu */
+.container {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Ombre plus prononcée pour un effet de profondeur */
+    padding: 40px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    border: 4px solid #333; /* Bordure épaisse pour un style ardoise */
+    position: relative;
+}
+
+/* Petite décoration en haut du conteneur (comme un fil pour le pendu) */
+.container::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 40px;
+    background-color: #333;
+}
+
+/* Décoration pendu (la corde) */
+.container::after {
+    content: '';
+    position: absolute;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 4px solid #333;
+}
+
+/* Style pour le titre de la page */
+.page-title {
+    color: #b22222; /* Rouge sombre pour un ton d'alerte */
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Légère ombre portée pour plus de dynamisme */
+}
+
+/* Style pour le paragraphe d'erreur */
+p {
+    font-size: 1.4rem;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+/* Style pour le lien de retour */
+.retry-link {
+    color: #fff;
+    background-color: #333; /* Fond sombre pour rappeler un tableau d'école */
+    text-decoration: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    display: inline-block;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-weight: bold;
+}
+
+.retry-link:hover {
+    background-color: #555; /* Lien plus clair au survol */
+    transform: scale(1.05); /* Légère animation de grossissement au survol */
+}
+
+/* Ajout d'un effet de tableau noir */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('/static/images/chalkboard.png'); /* Image de tableau noir (tu peux changer l'URL selon l'emplacement de l'image) */
+    opacity: 0.2; /* Effet de texture légère */
+    z-index: -1; /* Derrière tous les autres éléments */
+}

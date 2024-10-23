@@ -1,7 +1,7 @@
 /* Style global pour le body */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f0f2f5;
+    background: linear-gradient(135deg, #052656 25%, #d1e6f0 100%); /* Dégradé de fond */
     color: #333;
     margin: 0;
     padding: 0;
@@ -9,26 +9,93 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    overflow: hidden; /* Empêche le défilement */
+    position: relative; /* Pour les éléments absolus */
 }
 
+/* Animation de bulles en arrière-plan */
+@keyframes bubble {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-30px);
+    }
+}
+
+/* Création de bulles pour un effet dynamique */
+.bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    animation: bubble 5s infinite;
+}
+
+/* Placement aléatoire des bulles */
+.bubble:nth-child(1) {
+    width: 60px;
+    height: 60px;
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.bubble:nth-child(2) {
+    width: 80px;
+    height: 80px;
+    top: 30%;
+    left: 20%;
+    animation-delay: 1s;
+}
+
+.bubble:nth-child(3) {
+    width: 50px;
+    height: 50px;
+    top: 50%;
+    left: 30%;
+    animation-delay: 2s;
+}
+
+.bubble:nth-child(4) {
+    width: 70px;
+    height: 70px;
+    top: 40%;
+    left: 70%;
+    animation-delay: 3s;
+}
+
+.bubble:nth-child(5) {
+    width: 90px;
+    height: 90px;
+    top: 60%;
+    left: 50%;
+    animation-delay: 4s;
+}
+
+/* Conteneur principal */
 .container {
     background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    padding: 40px;
     max-width: 500px;
     width: 100%;
     text-align: center;
+    position: relative;
+    z-index: 1; /* Au-dessus des bulles */
 }
 
 /* Titres */
 h1, h2 {
     color: #4a90e2;
     margin-bottom: 20px;
+    text-transform: uppercase; /* Transforme le texte en majuscules */
+    letter-spacing: 1px; /* Espace entre les lettres */
 }
 
 h1 {
     font-size: 2.5rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); /* Ombre portée pour le titre */
 }
 
 h2 {
@@ -42,24 +109,31 @@ form {
     gap: 15px;
 }
 
+/* Style des labels */
 label {
     font-weight: bold;
     font-size: 1.1rem;
+    color: #333; /* Couleur sombre pour les labels */
 }
 
+/* Style des champs de saisie et sélection */
 input[type="text"], select {
-    padding: 10px;
+    padding: 12px;
     border-radius: 5px;
     border: 1px solid #ccc;
     font-size: 1rem;
     width: 100%;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transition douce */
 }
 
+/* Focus des champs */
 input[type="text"]:focus, select:focus {
     outline: none;
     border-color: #4a90e2;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5); /* Ombre portée au focus */
 }
 
+/* Style des boutons */
 button {
     padding: 12px;
     background-color: #4a90e2;
@@ -68,10 +142,18 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transition douce */
 }
 
+/* État au survol des boutons */
 button:hover {
     background-color: #357ABD;
+    transform: translateY(-2px); /* Légère élévation au survol */
+}
+
+/* État au focus des boutons */
+button:focus {
+    outline: 2px solid #4a90e2; /* Contour au focus */
 }
 
 /* Messages d'erreur */
@@ -79,6 +161,7 @@ button:hover {
     color: #e74c3c;
     font-size: 1.2rem;
     margin-bottom: 15px;
+    transition: opacity 0.3s ease; /* Transition pour l'apparition */
 }
 
 /* Message de succès */
@@ -86,6 +169,7 @@ button:hover {
     color: #2ecc71;
     font-size: 1.2rem;
     margin-bottom: 15px;
+    transition: opacity 0.3s ease; /* Transition pour l'apparition */
 }
 
 /* Pied de page */
@@ -95,11 +179,33 @@ footer {
     color: #888;
 }
 
+/* Style des liens */
 a {
     color: #4a90e2;
     text-decoration: none;
+    transition: color 0.3s ease; /* Transition douce */
 }
 
 a:hover {
-    text-decoration: underline;
+    color: #357ABD; /* Changement de couleur au survol */
+}
+
+/* Styles réactifs */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    button {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
 }
