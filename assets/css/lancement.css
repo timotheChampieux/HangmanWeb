@@ -66,24 +66,106 @@
     z-index: -1; /* Place l'image derrière le contenu */
     opacity: 0.8; /* Opacité pour rendre l'image plus visible */
 }
+        
+/* Conteneur principal avec image floutée en arrière-plan */
+.background-container {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Prend toute la hauteur de la vue */
+    overflow: hidden;
+}
+
+.background-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('static/img/photo.jpg') no-repeat center center/cover;
+    filter: blur(8px); /* Flou de l'image */
+    z-index: -1; /* Place l'image derrière le contenu */
+    opacity: 0.8; /* Opacité pour rendre l'image plus visible */
+}
 
 /* Conteneur du formulaire */
 .container {
     position: relative;
-    z-index: 1; /* S'assure que le formulaire est bien devant l'image floutée */
-    background-color: rgba(255, 255, 255, 0.9); /* Arrière-plan presque opaque pour une bonne lisibilité */
-    padding: 2.5rem 3rem; /* Espace intérieur */
-    border-radius: 10px; /* Coins arrondis */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Ombre douce pour un effet de profondeur */
+    z-index: 1; /* Place le formulaire devant l'image floutée */
+    background-color: rgba(255, 255, 255, 0.2); /* Arrière-plan plus transparent */
+    padding: 3rem 2.5rem; /* Espace intérieur légèrement ajusté */
+    border-radius: 12px; /* Coins légèrement plus arrondis */
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25); /* Ombre plus marquée */
     text-align: center;
-    max-width: 400px;
+    max-width: 450px;
     width: 90%; /* Largeur dynamique pour les petits écrans */
+    margin: auto; /* Centre le conteneur */
+    backdrop-filter: blur(10px); /* Ajoute un effet de flou sur le fond */
 }
 
 /* Style du titre */
 .container h1 {
     font-size: 2rem; /* Taille du titre */
-    color: #333; /* Coule */
+    color: #15d0f5; /* Couleur bleue pour le titre */
+    margin-bottom: 2rem; /* Espace sous le titre */
+    font-weight: 700;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Ajoute une légère ombre */
+    letter-spacing: 1.2px;
+}
+
+/* Style des labels */
+label {
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: rgba(21, 208, 245, 0.85); /* Bleu clair, unifié avec le titre */
+    text-align: left;
+}
+
+/* Style des champs de texte et de sélection */
+input[type="text"], select {
+    width: 100%;
+    padding: 0.9rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(21, 208, 245, 0.7); /* Bordure bleu clair */
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.3); /* Arrière-plan légèrement transparent */
+    color: #2a4d69; /* Couleur du texte */
+    font-size: 1rem;
+    text-align: center; /* Aligne le texte au centre */
+    transition: border-color 0.3s ease;
+}
+
+/* Changement de couleur de bordure au focus */
+input[type="text"]:focus, select:focus {
+    border-color: #15d0f5; /* Bordure plus vive au focus */
+    outline: none;
+}
+
+/* Style des boutons */
+button[type="submit"] {
+    background-color: rgba(21, 208, 245, 0.9); /* Bleu clair pour le bouton */
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Effet au survol du bouton */
+button[type="submit"]:hover {
+    background-color: #15c7d8; /* Bleu légèrement plus foncé */
+    transform: scale(1.05);
+}
+
+/* Message d'erreur */
+.error-message {
+    color: #ff6b6b; /* Rouge doux pour les messages d'erreur */
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
 }
 
 

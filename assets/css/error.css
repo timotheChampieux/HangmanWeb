@@ -51,7 +51,7 @@ body {
 
 /* Style pour le titre de la page */
 .page-title {
-    color: #b22222; /* Rouge sombre pour un ton d'alerte */
+    color: #090808; /* Rouge sombre pour un ton d'alerte */
     font-size: 2.5rem;
     margin-bottom: 20px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Légère ombre portée pour plus de dynamisme */
