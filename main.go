@@ -8,10 +8,13 @@ import (
 )
 
 var (
-	gameStarted bool   = false
-	pseudo      string = ""
-	difficulty  string = ""
+	gameStarted bool = false
 )
+
+type user struct {
+	Pseudo     string
+	Difficulty string
+}
 
 func main() {
 	fileServer := http.FileServer(http.Dir("./assets"))
@@ -22,26 +25,30 @@ func main() {
 		fmt.Printf("erreur avec le temp : %v", tempErr.Error())
 		os.Exit(02)
 	}
-
+	//------------------------------------------------------- 1ere page ----------------------------------------------
 	http.HandleFunc("/lancement", func(w http.ResponseWriter, r *http.Request) {
 		if gameStarted {
 			http.Redirect(w, r, "/game", http.StatusSeeOther)
 		}
 		tmpl.ExecuteTemplate(w, "lancement", nil)
 	})
-
+	user1 := user{}
 	http.HandleFunc("/lancement/treatment", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != http.MethodPost {
 			http.Redirect(w, r, "/lancement", http.StatusSeeOther)
 			return
 		}
 
-		pseudo = r.FormValue("pseudo")
-		difficulty = r.FormValue("difficulty")
+		user1.Pseudo = r.FormValue("pseudo")
+		if r.FormValue("difficulty") == "1" {
+			user1.Difficulty = "facile"
+		} else {
+			user1.Difficulty = "difficile"
+		}
 
-		validPseudo := len(pseudo) >= 1 && len(pseudo) <= 32
+		validPseudo := len(user1.Pseudo) >= 1 && len(user1.Pseudo) <= 32
 
-		validDifficulty := difficulty == "1" || difficulty == "2"
+		validDifficulty := r.FormValue("difficulty") == "1" || r.FormValue("difficulty") == "2"
 
 		if !validPseudo || !validDifficulty {
 			http.Redirect(w, r, "/lancement/error", http.StatusSeeOther)
@@ -49,13 +56,25 @@ func main() {
 			return
 		}
 		gameStarted = true
+		if gameStarted {
+			http.Redirect(w, r, "/game", http.StatusSeeOther)
+		}
 	})
-
-	// Gestion des erreurs
 	http.HandleFunc("/lancement/error", func(w http.ResponseWriter, r *http.Request) {
 		tmpl.ExecuteTemplate(w, "error", nil)
 	})
+	//------------------------------------------------------- page de jeu  ----------------------------------------------
+	http.HandleFunc("/game", func(w http.ResponseWriter, r *http.Request) {
+		/*if r.Method != http.MethodPost {
+			http.Redirect(w, r, "/lancement", http.StatusSeeOther)
+			return
+		}*/
 
+		tmpl.ExecuteTemplate(w, "game", user1)
+
+	})
+
+	//------------------------------------------------------- page de jeu  ----------------------------------------------
 	fmt.Println("Serveur démarré sur http://localhost:8080/lancement")
 	http.ListenAndServe(":8080", nil)
 }
