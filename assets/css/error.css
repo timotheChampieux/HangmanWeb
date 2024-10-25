@@ -1,7 +1,7 @@
 /* Style global pour le body */
 body {
     font-family: 'Courier New', Courier, monospace; /* Style machine à écrire pour rappeler le côté classique du jeu du pendu */
-    background-color: #f08c8c; /* Arrière-plan couleur "papier vieilli" */
+    background-color: #da1010; /* Arrière-plan couleur "papier vieilli" */
     color: #333; /* Couleur sombre pour le texte */
     margin: 0;
     padding: 0;
@@ -51,7 +51,7 @@ body {
 
 /* Style pour le titre de la page */
 .page-title {
-    color: #090808; /* Rouge sombre pour un ton d'alerte */
+    color: #b22222; /* Rouge sombre pour un ton d'alerte */
     font-size: 2.5rem;
     margin-bottom: 20px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Légère ombre portée pour plus de dynamisme */

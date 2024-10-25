@@ -5,27 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nouvelle Partie</title>
-    <link rel="stylesheet" href="static/css/lancement.css"> <!-- Chemin vers le fichier CSS -->
+    <link rel="stylesheet" href="static/css/lancement.css">
 </head>
 <body>
 
-<!-- Conteneur principal pour l'arrière-plan et le formulaire -->
-
 <div class="accueil">
     <div class="background-container">
-     <div class="container">
-         <h1>Démarrer une nouvelle partie</h1>
+        
+        <!-- Formulaire dans le tableau -->
+        <div class="container">
+            <h1>Démarrer une nouvelle partie</h1>
+
             <form id="gameForm" action="/lancement/treatment" method="POST">
-             <label for="pseudo">Pseudo :</label>
-              <input type="text" id="pseudo" name="pseudo" required>
+                <label for="pseudo">Pseudo :</label>
+                <input type="text" id="pseudo" name="pseudo" placeholder="Entrez votre pseudo" required>
 
-             <label for="difficulty">Niveau de difficulté :</label>
-             <select id="difficulty" name="difficulty" required>
-                   <option value="1">Facile</option>
+                <label for="difficulty">Niveau de difficulté :</label>
+                <select id="difficulty" name="difficulty" required>
+                    <option value="1">Facile</option>
                     <option value="2">Difficile</option>
-             </select>
+                </select>
 
-               <button type="submit">Démarrer la partie</button>
+                <button type="submit">Démarrer la partie</button>
             </form>
         </div>
     </div>
