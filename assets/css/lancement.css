@@ -1,211 +1,98 @@
-/* Style global pour le body */
-body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #052656 25%, #d1e6f0 100%); /* Dégradé de fond */
-    color: #333;
+/* Définition de l'arrière-plan de la page */
+* {
     margin: 0;
     padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f3f3f3; /* Couleur de fond claire pour la page */
+    color: #333; /* Couleur du texte plus foncée */
+    overflow: hidden; /* Empêche le défilement si l'image dépasse la taille de la page */
+}
+
+.background-container {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    overflow: hidden; /* Empêche le défilement */
-    position: relative; /* Pour les éléments absolus */
+    background: none; /* Supprime le dégradé précédent */
 }
 
-/* Animation de bulles en arrière-plan */
-@keyframes bubble {
-    0% {
-        transform: translateY(0);
-    }
-    100% {
-        transform: translateY(-30px);
-    }
-}
-
-/* Création de bulles pour un effet dynamique */
-.bubble {
+/* Image floutée en arrière-plan avec fond de secours */
+.background-container::before {
+    content: '';
     position: absolute;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    animation: bubble 5s infinite;
-}
-
-/* Placement aléatoire des bulles */
-.bubble:nth-child(1) {
-    width: 60px;
-    height: 60px;
-    top: 20%;
-    left: 10%;
-    animation-delay: 0s;
-}
-
-.bubble:nth-child(2) {
-    width: 80px;
-    height: 80px;
-    top: 30%;
-    left: 20%;
-    animation-delay: 1s;
-}
-
-.bubble:nth-child(3) {
-    width: 50px;
-    height: 50px;
-    top: 50%;
-    left: 30%;
-    animation-delay: 2s;
-}
-
-.bubble:nth-child(4) {
-    width: 70px;
-    height: 70px;
-    top: 40%;
-    left: 70%;
-    animation-delay: 3s;
-}
-
-.bubble:nth-child(5) {
-    width: 90px;
-    height: 90px;
-    top: 60%;
-    left: 50%;
-    animation-delay: 4s;
-}
-
-/* Conteneur principal */
-.container {
-    background-color: #fff;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    padding: 40px;
-    max-width: 500px;
+    top: 0;
+    left: 0;
     width: 100%;
-    text-align: center;
+    height: 100vh;
+    background: url('static/img/photo.jpg') no-repeat center center/cover;
+    background-color: #333; /* Fond de secours si l'image ne charge pas */
+    filter: blur(8px); /* Réduit le flou pour plus de visibilité */
+    z-index: -1; /* Place l'image derrière le contenu */
+    opacity: 0.8; /* Augmente l'opacité pour rendre l'image plus visible */
+}
+
+
+/* Définition de l'arrière-plan de la page */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Assure que padding et border sont inclus dans la largeur totale */
+    font-family: 'Arial', sans-serif;
+    background-color: #f3f3f3; /* Couleur de fond claire pour la page */
+    color: #333; /* Couleur du texte */
+    overflow: hidden; /* Empêche le défilement si l'image dépasse la taille de la page */
+}
+
+/* Conteneur principal pour l'arrière-plan */
+.background-container {
     position: relative;
-    z-index: 1; /* Au-dessus des bulles */
-}
-
-/* Titres */
-h1, h2 {
-    color: #4a90e2;
-    margin-bottom: 20px;
-    text-transform: uppercase; /* Transforme le texte en majuscules */
-    letter-spacing: 1px; /* Espace entre les lettres */
-}
-
-h1 {
-    font-size: 2.5rem;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); /* Ombre portée pour le titre */
-}
-
-h2 {
-    font-size: 1.8rem;
-}
-
-/* Formulaires */
-form {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-/* Style des labels */
-label {
-    font-weight: bold;
-    font-size: 1.1rem;
-    color: #333; /* Couleur sombre pour les labels */
-}
-
-/* Style des champs de saisie et sélection */
-input[type="text"], select {
-    padding: 12px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
+/* Image floutée en arrière-plan */
+.background-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transition douce */
+    height: 100%;
+    background: url('static/img/photo.jpg') no-repeat center center/cover;
+    filter: blur(8px); /* Flou de l'image */
+    z-index: -1; /* Place l'image derrière le contenu */
+    opacity: 0.8; /* Opacité pour rendre l'image plus visible */
 }
 
-/* Focus des champs */
-input[type="text"]:focus, select:focus {
-    outline: none;
-    border-color: #4a90e2;
-    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5); /* Ombre portée au focus */
+/* Conteneur du formulaire */
+.container {
+    position: relative;
+    z-index: 1; /* S'assure que le formulaire est bien devant l'image floutée */
+    background-color: rgba(255, 255, 255, 0.9); /* Arrière-plan presque opaque pour une bonne lisibilité */
+    padding: 2.5rem 3rem; /* Espace intérieur */
+    border-radius: 10px; /* Coins arrondis */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Ombre douce pour un effet de profondeur */
+    text-align: center;
+    max-width: 400px;
+    width: 90%; /* Largeur dynamique pour les petits écrans */
 }
 
-/* Style des boutons */
-button {
-    padding: 12px;
-    background-color: #4a90e2;
-    color: white;
-    font-size: 1rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Transition douce */
+/* Style du titre */
+.container h1 {
+    font-size: 2rem; /* Taille du titre */
+    color: #333; /* Coule */
 }
 
-/* État au survol des boutons */
-button:hover {
-    background-color: #357ABD;
-    transform: translateY(-2px); /* Légère élévation au survol */
-}
 
-/* État au focus des boutons */
-button:focus {
-    outline: 2px solid #4a90e2; /* Contour au focus */
-}
 
-/* Messages d'erreur */
-.error-message {
-    color: #e74c3c;
-    font-size: 1.2rem;
-    margin-bottom: 15px;
-    transition: opacity 0.3s ease; /* Transition pour l'apparition */
-}
 
-/* Message de succès */
-.success-message {
-    color: #2ecc71;
-    font-size: 1.2rem;
-    margin-bottom: 15px;
-    transition: opacity 0.3s ease; /* Transition pour l'apparition */
-}
-
-/* Pied de page */
-footer {
-    margin-top: 20px;
-    font-size: 0.9rem;
-    color: #888;
-}
-
-/* Style des liens */
-a {
-    color: #4a90e2;
-    text-decoration: none;
-    transition: color 0.3s ease; /* Transition douce */
-}
-
-a:hover {
-    color: #357ABD; /* Changement de couleur au survol */
-}
-
-/* Styles réactifs */
-@media (max-width: 600px) {
-    .container {
-        padding: 20px;
-    }
-
-    h1 {
-        font-size: 2rem;
-    }
-
-    h2 {
-        font-size: 1.5rem;
-    }
-
-    button {
-        padding: 10px;
-        font-size: 0.9rem;
-    }
+.accueil {
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(../img/photo.jpg);
+    background-size: cover;
+    background-position: center;
 }
