@@ -2,8 +2,7 @@ package jeu
 
 import (
 	"fmt"
-	"hangman/affichage"
-	"hangman/son"
+	"hangmanWeb/game/affichage"
 	"os"
 	"os/exec"
 	"runtime"
@@ -86,12 +85,6 @@ func Jeu(mot string, motMasque []string) {
 			if count == 0 {
 				essaie--
 				fmt.Printf("\n\033[31mLa lettre que vous avez entré n'est pas contenue dans le mot.\033[0m \n")
-
-				son.JouerSon(".\\son\\erreur.mp3")
-
-			} else {
-
-				son.JouerSon(".\\son\\valide.mp3")
 			}
 
 		} else {
@@ -104,8 +97,6 @@ func Jeu(mot string, motMasque []string) {
 				essaie -= 2
 				fmt.Printf("\n\033[31mCe n'est pas le bon mot.\033[0m \n")
 
-				son.JouerSon(".\\son\\erreur.mp3")
-
 			}
 
 		}
@@ -116,14 +107,10 @@ func Jeu(mot string, motMasque []string) {
 		time.Sleep(1 * time.Second)
 		fmt.Printf("\n\033[32mVous avez gagné !! Le mot etait bien %v.\033[0m", mot)
 
-		son.JouerSon(".\\son\\Victoire.mp3")
-
 	} else {
 
 		affichage.AfficherPendu(1)
 		time.Sleep(1 * time.Second)
 		fmt.Printf("\n\033[31mVous avez perdu... Le mot etait %v.\033[0m", mot)
-
-		son.JouerSon(".\\son\\defaite.mp3")
 	}
 }

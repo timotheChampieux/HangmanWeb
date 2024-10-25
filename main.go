@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	recupmot "hangmanWeb/game/recupMot"
 	"net/http"
 	"os"
 	"text/template"
@@ -64,13 +65,15 @@ func main() {
 		tmpl.ExecuteTemplate(w, "error", nil)
 	})
 	//------------------------------------------------------- page de jeu  ----------------------------------------------
+	type data struct {
+		User2 user
+		Mot   string
+	}
 	http.HandleFunc("/game", func(w http.ResponseWriter, r *http.Request) {
-		/*if r.Method != http.MethodPost {
-			http.Redirect(w, r, "/lancement", http.StatusSeeOther)
-			return
-		}*/
-		motAleatoire := recupmot.Recup(".\\recupMot\\mot.txt")
-		tmpl.ExecuteTemplate(w, "game", user1)
+
+		motAleatoire := recupmot.Recup("./game/recupMot/mot.txt")
+		data := data{user1, motAleatoire}
+		tmpl.ExecuteTemplate(w, "game", data)
 
 	})
 
