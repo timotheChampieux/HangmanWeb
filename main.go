@@ -69,7 +69,7 @@ func main() {
 			http.Redirect(w, r, "/lancement", http.StatusSeeOther)
 			return
 		}*/
-
+		motAleatoire := recupmot.Recup(".\\recupMot\\mot.txt")
 		tmpl.ExecuteTemplate(w, "game", user1)
 
 	})
