@@ -32,7 +32,7 @@ func demanderElement(slice *[]string) string {
 		var lettre string
 		fmt.Scanln(&lettre)
 
-		if !elementDansSlice(lettre, *slice) {
+		if !ElementDansSlice(lettre, *slice) {
 			*slice = append(*slice, lettre)
 			return lettre
 		} else {
@@ -42,7 +42,7 @@ func demanderElement(slice *[]string) string {
 	}
 }
 
-func elementDansSlice(element string, slice []string) bool {
+func ElementDansSlice(element string, slice []string) bool {
 	for _, e := range slice {
 		if e == element {
 			return true
