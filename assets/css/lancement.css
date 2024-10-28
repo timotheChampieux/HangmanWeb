@@ -3,9 +3,8 @@
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
-    background-color: #f3f3f3; /* Couleur de fond claire pour la page */
-    color: #333; /* Couleur du texte plus foncée */
-    overflow: hidden; /* Empêche le défilement si l'image dépasse la taille de la page */
+    color: #040404;
+    overflow: hidden;
 }
 
 .background-container {
@@ -14,7 +13,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: none; /* Supprime le dégradé précédent */
+    background: none;
 }
 
 /* Image floutée en arrière-plan avec fond de secours */
@@ -26,10 +25,10 @@
     width: 100%;
     height: 100vh;
     background: url('static/img/photo.jpg') no-repeat center center/cover;
-    background-color: #333; /* Fond de secours si l'image ne charge pas */
-    filter: blur(8px); /* Réduit le flou pour plus de visibilité */
-    z-index: -1; /* Place l'image derrière le contenu */
-    opacity: 0.8; /* Augmente l'opacité pour rendre l'image plus visible */
+    background-color: #040404;
+    filter: blur(8px);
+    z-index: -1;
+    opacity: 0.8;
 }
 
 
@@ -37,14 +36,14 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Assure que padding et border sont inclus dans la largeur totale */
+    border-radius: 8px; 
+    box-sizing: border-box;
     font-family: 'Arial', sans-serif;
-    background-color: #f3f3f3; /* Couleur de fond claire pour la page */
-    color: #333; /* Couleur du texte */
-    overflow: hidden; /* Empêche le défilement si l'image dépasse la taille de la page */
+    color: #060000; 
+    overflow: hidden;
 }
 
-/* Conteneur principal pour l'arrière-plan */
+
 .background-container {
     position: relative;
     display: flex;
@@ -53,99 +52,77 @@
     height: 100vh;
 }
 
-/* Image floutée en arrière-plan */
-.background-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('static/img/photo.jpg') no-repeat center center/cover;
-    filter: blur(8px); /* Flou de l'image */
-    z-index: -1; /* Place l'image derrière le contenu */
-    opacity: 0.8; /* Opacité pour rendre l'image plus visible */
-}
-        
-/* Conteneur principal avec image floutée en arrière-plan */
-.background-container {
-    position: relative;
-    width: 100%;
-    height: 100vh; /* Prend toute la hauteur de la vue */
-    overflow: hidden;
-}
 
-.background-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('static/img/photo.jpg') no-repeat center center/cover;
-    filter: blur(8px); /* Flou de l'image */
-    z-index: -1; /* Place l'image derrière le contenu */
-    opacity: 0.8; /* Opacité pour rendre l'image plus visible */
-}
-
-/* Conteneur du formulaire */
 .container {
     position: relative;
-    z-index: 1; /* Place le formulaire devant l'image floutée */
-    background-color: rgba(255, 255, 255, 0.); /* Arrière-plan plus transparent */
-    padding: 3rem 2.5rem; /* Espace intérieur légèrement ajusté */
-    border-radius: 12px; /* Coins légèrement plus arrondis */
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25); /* Ombre plus marquée */
+    z-index: 1; 
+    background-color: rgba(255, 255, 255, 0.0);
+    padding: 3rem 2.5rem; 
+    border-radius: 12px;
     text-align: center;
     max-width: 450px;
-    width: 90%; /* Largeur dynamique pour les petits écrans */
-    margin: auto; /* Centre le conteneur */
-    backdrop-filter: blur(10px); /* Ajoute un effet de flou sur le fond */
+    width: 90%; 
+    margin: auto;
 }
 
 /* Style du titre */
 .container h1 {
-    font-size: 2rem; /* Taille du titre */
-    color: #15d0f5; /* Couleur bleue pour le titre */
-    margin-bottom: 2rem; /* Espace sous le titre */
+    font-size: 2rem; 
+    color: #15d0f5; 
+    border-radius: 12px;    
+    margin-bottom: 2rem; 
     font-weight: 700;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Ajoute une légère ombre */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
     letter-spacing: 1.2px;
 }
 
 /* Style des labels */
 label {
     display: block;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     margin-bottom: 0.5rem;
-    color: rgba(21, 208, 245, 0.85); /* Bleu clair, unifié avec le titre */
+    color: rgba(245, 240, 240, 0.85); 
     text-align: left;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 /* Style des champs de texte et de sélection */
 input[type="text"], select {
-    width: 100%;
+    width: 100%;    
     padding: 0.9rem;
     margin-bottom: 1.5rem;
-    border: 1px solid rgba(21, 208, 245, 0.7); /* Bordure bleu clair */
+    border: 1px solid rgba(22, 208, 245, 0.9);
     border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.3); /* Arrière-plan légèrement transparent */
-    color: #2a4d69; /* Couleur du texte */
+    background-color: rgba(64, 32, 32, 0);
+    color: #f6f0f0;
     font-size: 1rem;
-    text-align: center; /* Aligne le texte au centre */
+    text-align: center;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"] {
+    width: 100%;    
+    padding: 0.9rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(22, 208, 245, 0.9);
+    border-radius: 8px;
+    background-color: rgba(64, 32, 32, 0);
+    color: #f6f0f0;
+    font-size: 1rem;
+    text-align: center;
     transition: border-color 0.3s ease;
 }
 
 /* Changement de couleur de bordure au focus */
 input[type="text"]:focus, select:focus {
-    border-color: #15d0f5; /* Bordure plus vive au focus */
+    border-color: #15d0f5;
     outline: none;
 }
 
 /* Style des boutons */
 button[type="submit"] {
-    background-color: rgba(21, 208, 245, 0.9); /* Bleu clair pour le bouton */
-    color: white;
+    background-color: rgba(21, 208, 245, 0.9);
+    color: rgb(247, 240, 240);
     border: none;
     padding: 0.8rem 1.5rem;
     border-radius: 8px;
@@ -157,18 +134,9 @@ button[type="submit"] {
 
 /* Effet au survol du bouton */
 button[type="submit"]:hover {
-    background-color: #15c7d8; /* Bleu légèrement plus foncé */
+    background-color: #15c7d8;
     transform: scale(1.05);
 }
-
-/* Message d'erreur */
-.error-message {
-    color: #ff6b6b; /* Rouge doux pour les messages d'erreur */
-    font-size: 0.9rem;
-    margin-top: 0.5rem;
-}
-
-
 
 
 .accueil {
