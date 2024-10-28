@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"hangmanWeb/game/affichage"
+	"hangmanWeb/game/jeu"
 	recupmot "hangmanWeb/game/recupMot"
 	"math/rand"
 	"net/http"
@@ -11,12 +12,15 @@ import (
 )
 
 var (
-	gameStarted  bool = false
-	essaie       int  = 8
-	reussitte    int
-	motCacher    string
-	motMasque    []string
-	motAleatoire string
+	gameStarted       bool = false
+	essaie            int  = 8
+	reussitte         int
+	motCacher         string
+	motMasque         []string
+	motAleatoire      string
+	count             int = 0
+	lettreDejaPropose []string
+	lettrePropose     string
 )
 
 type user struct {
@@ -73,36 +77,42 @@ func main() {
 	})
 	//------------------------------------------------------- page de jeu  ----------------------------------------------
 	type data struct {
-		User2     user
-		Mot       string
-		MotCacher string
-		Essaie    int // nombre de vie
-		Reussitte int // nombre de lettre a trouver
-
+		User2             user
+		Mot               string
+		MotCacher         string
+		Essaie            int // nombre de vie
+		Reussitte         int // nombre de lettre a trouver
+		LettreDejaPropose string
 	}
 	motAleatoire = recupmot.Recup("./game/recupMot/mot.txt")
 	http.HandleFunc("/game", func(w http.ResponseWriter, r *http.Request) {
 
-		motMasque = affichage.Debut(motAleatoire)
-
-		for i := 0; i < len(motMasque); i++ {
-			motMasque[i] = "_ "
+		if count == 0 {
+			motMasque = affichage.Debut(motAleatoire)
+			for i := 0; i < len(motMasque); i++ {
+				motMasque[i] = "_ "
+			}
 		}
-		if user1.Difficulty == "difficile" {
+
+		if user1.Difficulty == "difficile" && count == 0 {
+			count++
 			reussitte = len(motMasque) - 1
 			motMasque[0] = string(motAleatoire[0])
-		} else {
+		} else if user1.Difficulty == "facile" && count == 0 {
 			reussitte = len(motMasque) - 2
+			count++
 			motMasque[0] = string(motAleatoire[0])
 			max := len(motMasque)
 			indexLettreAletoire := rand.Intn(max - 1)
 			motMasque[indexLettreAletoire+1] = string(motAleatoire[indexLettreAletoire+1])
 		}
+
+		motCacher = ""
 		for i := 0; i < len(motMasque); i++ {
 			motCacher += motMasque[i]
 		}
 
-		data := data{user1, motAleatoire, motCacher, essaie, reussitte}
+		data := data{user1, motAleatoire, motCacher, essaie, reussitte, lettrePropose}
 
 		tmpl.ExecuteTemplate(w, "game", data)
 	})
@@ -116,10 +126,21 @@ func main() {
 		}
 
 		lettre := r.FormValue("lettre")
+		lettreDejaPropose = append(lettreDejaPropose, lettre)
+		lettrePropose = ""
+		for i := 0; i < len(lettreDejaPropose); i++ {
+			lettrePropose += " "
+			lettrePropose += lettreDejaPropose[i]
+		}
+		if jeu.ElementDansSlice(lettre, lettreDejaPropose) {
+			//
+		}
+
 		if len(lettre) == 1 {
 			var count int
 			for i := 0; i < len(motAleatoire); i++ {
 				if lettre == string(motAleatoire[i]) && lettre != motMasque[i] {
+					print(1)
 					motMasque[i] = lettre
 					reussitte--
 					count++
@@ -127,9 +148,19 @@ func main() {
 			}
 			if count == 0 {
 				essaie--
-				fmt.Printf("\n\033[31mLa lettre que vous avez entré n'est pas contenue dans le mot.\033[0m \n")
 			}
+		} else {
+			if lettre == motAleatoire {
+				for i := 0; i < len(motAleatoire); i++ {
+					motMasque[i] = string(lettre[i])
+				}
+				reussitte = 0
+			} else {
+				essaie -= 2
+			}
+
 		}
+		motCacher = ""
 		for i := 0; i < len(motMasque); i++ {
 			motCacher += motMasque[i]
 		}
