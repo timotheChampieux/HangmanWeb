@@ -9,6 +9,14 @@
 <body>
     <h1>Bienvenue {{.User2.Pseudo}} vous avez choisi la difficulté : {{.User2.Difficulty}}</h1>
     <h2>Le mot a deviner est : {{.Mot}}</h2>
+    <h3>Mot caché : {{.MotCacher}}</h3>
+    <h3>Nombre de vie : {{.Essaie}}</h3>
+    <h3>Nombre de lettre a trouver : {{.Reussitte}}</h3>
+    <form id="gameForm" action="/game/treatment" method="POST">
+        <label for="pseudo">Choisissez une lettre ou le mot : </label>
+         <input type="text" id="pseudo" name="lettre" required>
+          <button type="submit">Valider</button>
+       </form>
 </body>
 </html>
 {{end}}
