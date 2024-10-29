@@ -641,7 +641,6 @@ futurebass
 synthwave
 techhouse
 electrohouse
-idm
 downtempo
 breakbeat
 jungle
@@ -1379,7 +1378,6 @@ fromage
 beurre
 cremefraiche
 laitdeamande
-laitde soja
 cereal
 pain
 baguette

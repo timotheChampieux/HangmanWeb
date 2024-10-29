@@ -13,7 +13,7 @@ import (
 
 var (
 	gameStarted       bool = false
-	essaie            int  = 8
+	essaie            int  = 7
 	reussitte         int
 	motCacher         string
 	motMasque         []string
@@ -126,21 +126,23 @@ func main() {
 		}
 
 		lettre := r.FormValue("lettre")
-		lettreDejaPropose = append(lettreDejaPropose, lettre)
-		lettrePropose = ""
-		for i := 0; i < len(lettreDejaPropose); i++ {
-			lettrePropose += " "
-			lettrePropose += lettreDejaPropose[i]
+		if !jeu.ElementDansSlice(lettre, lettreDejaPropose) {
+			lettreDejaPropose = append(lettreDejaPropose, lettre)
+			lettrePropose = ""
+			for i := 0; i < len(lettreDejaPropose); i++ {
+				lettrePropose += " "
+				lettrePropose += lettreDejaPropose[i]
+			}
 		}
+
 		if jeu.ElementDansSlice(lettre, lettreDejaPropose) {
 			//
 		}
 
-		if len(lettre) == 1 {
+		if len(lettre) == 1 && !jeu.ElementDansSlice(lettre, lettreDejaPropose) {
 			var count int
 			for i := 0; i < len(motAleatoire); i++ {
 				if lettre == string(motAleatoire[i]) && lettre != motMasque[i] {
-					print(1)
 					motMasque[i] = lettre
 					reussitte--
 					count++
@@ -149,7 +151,7 @@ func main() {
 			if count == 0 {
 				essaie--
 			}
-		} else {
+		} else if !jeu.ElementDansSlice(lettre, lettreDejaPropose) {
 			if lettre == motAleatoire {
 				for i := 0; i < len(motAleatoire); i++ {
 					motMasque[i] = string(lettre[i])
