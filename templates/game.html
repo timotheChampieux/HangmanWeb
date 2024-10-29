@@ -6,19 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/game.css">
     <title>Document</title>
-</head>
+</head> 
 <body>
+    <div>
+        <div class="container-info "> 
+            <h1>Bienvenue {{.User2.Pseudo}} vous avez choisi la difficulté : {{.User2.Difficulty}}</h1>
 
-    <h1>Bienvenue {{.User2.Pseudo}} vous avez choisi la difficulté : {{.User2.Difficulty}}</h1>
-    <h2>Le mot à deviner est : {{.Mot}}</h2>
-    <h3>Mot caché : {{.MotCacher}}</h3>
-    <h3>Nombre de vies : {{.Essaie}}</h3>
-    <h3>Nombre de lettres à trouver : {{.Reussitte}}</h3>
-    <h3>Lettres déjà proposées : {{.LettreDejaPropose}}</h3>
+            <h2>Le mot à deviner est : {{.Mot}}</h2>
+            <h3>Mot caché : {{.MotCacher}}</h3>
+            <h3>Nombre de vies : {{.Essaie}}</h3>
+            <h3>Nombre de lettres à trouver : {{.Reussitte}}</h3>
+            <h3>Lettres déjà proposées : {{.LettreDejaPropose}}</h3>
+        </div>
+        
 
-    <!-- Message temporaire -->
-    <div id="message">Ceci est un message temporaire</div>
-
+        <div id="message">Ceci est un message temporaire</div>
+    <div>
     <!-- Formulaire -->
     <form id="gameForm" action="/game/treatment" method="POST">
         <label for="pseudo">Choisissez une lettre ou le mot : </label>
