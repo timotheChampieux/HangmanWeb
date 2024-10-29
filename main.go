@@ -21,6 +21,7 @@ var (
 	count             int = 0
 	lettreDejaPropose []string
 	lettrePropose     string
+	win               bool
 )
 
 type user struct {
@@ -38,7 +39,7 @@ func main() {
 		os.Exit(02)
 	}
 	//------------------------------------------------------- 1ere page ----------------------------------------------
-	http.HandleFunc("/lancement", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		if gameStarted {
 			http.Redirect(w, r, "/game", http.StatusSeeOther)
 		}
@@ -83,6 +84,7 @@ func main() {
 		Essaie            int // nombre de vie
 		Reussitte         int // nombre de lettre a trouver
 		LettreDejaPropose string
+		Message           string
 	}
 	motAleatoire = recupmot.Recup("./game/recupMot/mot.txt")
 	http.HandleFunc("/game", func(w http.ResponseWriter, r *http.Request) {
@@ -112,9 +114,18 @@ func main() {
 			motCacher += motMasque[i]
 		}
 
-		data := data{user1, motAleatoire, motCacher, essaie, reussitte, lettrePropose}
+		data := data{user1, motAleatoire, motCacher, essaie, reussitte, lettrePropose, r.FormValue("message")}
 
+		if essaie <= 0 {
+			win = false
+			http.Redirect(w, r, "/fin", http.StatusSeeOther)
+		} else if reussitte == 0 {
+			win = true
+			http.Redirect(w, r, "/fin", http.StatusSeeOther)
+		}
+		fmt.Println(r.FormValue("message"))
 		tmpl.ExecuteTemplate(w, "game", data)
+
 	})
 
 	//-------------------------------------------------------  traitement page de jeu  ----------------------------------------------
@@ -124,8 +135,41 @@ func main() {
 			http.Redirect(w, r, "/game", http.StatusSeeOther)
 			return
 		}
-
+		message := ""
 		lettre := r.FormValue("lettre")
+
+		if jeu.ElementDansSlice(lettre, lettreDejaPropose) {
+			message = "Vous avez déja entré cette lettre !"
+		}
+
+		if len(lettre) == 1 && !jeu.ElementDansSlice(lettre, lettreDejaPropose) {
+			var count int
+			for i := 0; i < len(motAleatoire); i++ {
+				if lettre == string(motAleatoire[i]) && lettre != motMasque[i] {
+					motMasque[i] = lettre
+					reussitte--
+					message = "Bien vu"
+					count++
+				}
+			}
+			if count == 0 {
+				message = "Raté"
+				essaie--
+			}
+		} else if !jeu.ElementDansSlice(lettre, lettreDejaPropose) {
+			if lettre == motAleatoire {
+				for i := 0; i < len(motAleatoire); i++ {
+					motMasque[i] = string(lettre[i])
+				}
+				message = "GGGGGGGGG"
+				reussitte = 0
+			} else {
+				message = "Bien tenté"
+				essaie -= 2
+			}
+
+		}
+
 		if !jeu.ElementDansSlice(lettre, lettreDejaPropose) {
 			lettreDejaPropose = append(lettreDejaPropose, lettre)
 			lettrePropose = ""
@@ -135,40 +179,27 @@ func main() {
 			}
 		}
 
-		if jeu.ElementDansSlice(lettre, lettreDejaPropose) {
-			//
-		}
-
-		if len(lettre) == 1 && !jeu.ElementDansSlice(lettre, lettreDejaPropose) {
-			var count int
-			for i := 0; i < len(motAleatoire); i++ {
-				if lettre == string(motAleatoire[i]) && lettre != motMasque[i] {
-					motMasque[i] = lettre
-					reussitte--
-					count++
-				}
-			}
-			if count == 0 {
-				essaie--
-			}
-		} else if !jeu.ElementDansSlice(lettre, lettreDejaPropose) {
-			if lettre == motAleatoire {
-				for i := 0; i < len(motAleatoire); i++ {
-					motMasque[i] = string(lettre[i])
-				}
-				reussitte = 0
-			} else {
-				essaie -= 2
-			}
-
-		}
 		motCacher = ""
 		for i := 0; i < len(motMasque); i++ {
 			motCacher += motMasque[i]
 		}
-		http.Redirect(w, r, "/game", http.StatusSeeOther)
+		http.Redirect(w, r, "/game?message="+message, http.StatusSeeOther)
 	})
-	//-------------------------------------------------------  traitement page de jeu  ----------------------------------------------
-	fmt.Println("Serveur démarré sur http://localhost:8080/lancement")
-	http.ListenAndServe(":8080", nil)
+	//-------------------------------------------------------  traitement page de fin ----------------------------------------------
+	type dataEnd struct {
+		Win bool
+		Mot string
+	}
+	http.HandleFunc("/fin", func(w http.ResponseWriter, r *http.Request) {
+		/*if  {
+			http.Redirect(w, r, "/game", http.StatusSeeOther)
+			return
+		}*/
+		data := dataEnd{Win: win, Mot: motAleatoire}
+		tmpl.ExecuteTemplate(w, "fin", data)
+	})
+
+	//------------------------------------------------------------------------------------------------------------------------------
+	fmt.Println("Serveur démarré sur http://localhost:8000/lancement")
+	http.ListenAndServe(":8000", nil)
 }
