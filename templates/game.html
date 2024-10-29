@@ -16,6 +16,21 @@
     <h3>Nombre de lettres à trouver : {{.Reussitte}}</h3>
     <h3>Lettres déjà proposées : {{.LettreDejaPropose}}</h3>
 
+
+    {{if eq .Essaie 7}}
+    {{else if eq .Essaie 6}}
+    <img src="/static/img/image1.jpg" >
+    {{else if eq .Essaie 5}}
+    <img src="/static/img/image 3.jpg" >
+    {{else if eq .Essaie 4}}
+    <img src="/static/img/image 2.jpg" >
+    {{else if eq .Essaie 3}}
+    <img src="/static/img/image 4.jpg" >
+    {{else if eq .Essaie 2}}
+    <img src="/static/img/image 5.jpg" >
+    {{else if eq .Essaie 1}}
+    <img src="/static/img/image 6.jpg" >
+    {{end}}
     <!-- Message temporaire -->
     <div id="message">Ceci est un message temporaire</div>
 
