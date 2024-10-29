@@ -1,12 +1,140 @@
+/* Réinitialisation Universelle */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Style du Body */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(145deg, #1f1c2c, #928dab);
+    color: #eceff4;
+    overflow: hidden;
+    padding: 20px;
+}
+
+/* Titres avec Effet de Néon */
+h1 {
+    font-size: 2.5em;
+    color: #ff79c6;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 0 0 8px rgba(255, 121, 198, 0.8), 0 0 20px rgba(255, 121, 198, 0.5);
+    animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+h2, h3 {
+    font-size: 1.2em;
+    color: #8be9fd;
+    margin: 10px 0;
+    text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Animation de Néon pour le Titre */
+@keyframes glow {
+    from {
+        text-shadow: 0 0 8px rgba(255, 121, 198, 0.8), 0 0 20px rgba(255, 121, 198, 0.5);
+    }
+    to {
+        text-shadow: 0 0 12px rgba(255, 121, 198, 1), 0 0 30px rgba(255, 121, 198, 0.8);
+    }
+}
+
+/* Affichage du Message */
 #message {
-    display: none; /* Caché par défaut */
-    background-color: #4CAF50;
-    color: white;
+    display: none;
+    margin: 15px 0;
     padding: 10px;
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    border-radius: 5px;
-    z-index: 1000;
-    font-family: Arial, sans-serif;
+    color: #000;
+    background: linear-gradient(135deg, #ffeb3b, #ffc107);
+    font-weight: bold;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(255, 193, 7, 0.6);
+    animation: fadeInOut 2s ease-in-out forwards;
+}
+
+/* Animation d’Apparition et Disparition */
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0; }
+    10%, 90% { opacity: 1; }
+}
+
+/* Style du Formulaire */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+    transition: transform 0.3s ease;
+}
+
+form:hover {
+    transform: scale(1.02);
+}
+
+/* Style du Champ de Texte */
+input[type="text"] {
+    width: 250px;
+    padding: 12px;
+    font-size: 1em;
+    color: #f8f8f2;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid transparent;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus {
+    border-color: #ff79c6;
+    box-shadow: 0px 0px 10px rgba(255, 121, 198, 0.5);
+}
+
+/* Style du Bouton avec Animation Interactive */
+button {
+    padding: 12px 24px;
+    color: #fff;
+    font-size: 1em;
+    background: linear-gradient(135deg, #ff79c6, #ff5555);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0px 4px 10px rgba(255, 85, 85, 0.4);
+}
+
+button:hover {
+    background: linear-gradient(135deg, #ff5555, #ff79c6);
+    box-shadow: 0px 6px 15px rgba(255, 85, 85, 0.6);
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(2px);
+}
+
+/* Design Responsive */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2em;
+    }
+    form {
+        width: 100%;
+        padding: 15px;
+    }
+    input[type="text"], button {
+        width: 100%;
+    }
 }
