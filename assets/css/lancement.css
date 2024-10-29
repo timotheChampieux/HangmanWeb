@@ -100,7 +100,7 @@ input[type="text"], select {
     transition: border-color 0.3s ease;
 }
 input::placeholder {
-    color: white;
+    color: rgb(247, 243, 243);
 }
 
 /* Changement de couleur de bordure au focus */
