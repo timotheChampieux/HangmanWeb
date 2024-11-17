@@ -8,42 +8,45 @@
     <title>Document</title>
 </head> 
 <body>
-
-    <h1>Bienvenue {{.User2.Pseudo}} vous avez choisi la difficulté : {{.User2.Difficulty}}</h1>
-    <h2>Le mot à deviner est : {{.Mot}}</h2>
-    <h3>Mot caché : {{.MotCacher}}</h3>
-    <h3>Nombre de vies : {{.Essaie}}</h3>
-    <h3>Nombre de lettres à trouver : {{.Reussitte}}</h3>
-    <h3>Lettres déjà proposées : {{.LettreDejaPropose}}</h3>
-
-
-    {{if eq .Essaie 7}}
-    {{else if eq .Essaie 6}}
-    <img src="/static/img/image1.jpg" >
-    {{else if eq .Essaie 5}}
-    <img src="/static/img/image 3.jpg" >
-    {{else if eq .Essaie 4}}
-    <img src="/static/img/image 2.jpg" >
-    {{else if eq .Essaie 3}}
-    <img src="/static/img/image 4.jpg" >
-    {{else if eq .Essaie 2}}
-    <img src="/static/img/image 5.jpg" >
-    {{else if eq .Essaie 1}}
-    <img src="/static/img/image 6.jpg" >
-    {{end}}
-    <!-- Message temporaire -->
-    <div id="message">Ceci est un message temporaire</div>
-
-    <!-- Formulaire -->
-    <form id="gameForm" action="/game/treatment" method="POST">
-
-        <label for="pseudo">Choisissez une lettre ou le mot : </label>
-        <input type="text" id="pseudo" name="lettre" required>
-        <button type="submit" >valider</button> <!-- Bouton de soumission masqué -->
-    </form>
-
-    
-
+    <div class="container">
+        <div class="title">
+            <h1 >Bienvenue {{.User2.Pseudo}} vous avez choisi la difficulté : {{.User2.Difficulty}}</h1>
+        </div>
+        <div class="middle">
+            <div class="text">
+                <h2>Mot caché : {{.MotCacher}}</h3>
+                <h3>Nombre de vies : {{.Essaie}}</h3>
+                <h3>Nombre de lettres à trouver : {{.Reussitte}}</h3>
+                <h3>Lettres déjà proposées : {{.LettreDejaPropose}}</h3>
+            </div>
+            <div class="image">
+                {{if eq .Essaie 7}}
+                {{else if eq .Essaie 6}}
+                <img src="/static/img/image1.jpg" >
+                {{else if eq .Essaie 5}}
+                <img src="/static/img/image 3.jpg" >
+                {{else if eq .Essaie 4}}
+                <img src="/static/img/image 2.jpg" >
+                {{else if eq .Essaie 3}}
+                <img src="/static/img/image 4.jpg" >
+                {{else if eq .Essaie 2}}
+                <img src="/static/img/image 5.jpg" >
+                {{else if eq .Essaie 1}}
+                <img src="/static/img/image 6.jpg" >
+                {{end}}
+            </div>
+            <div class="message">
+                <h3>{{.Message}}</h3>
+            </div>
+        </div>
+        <div class="Formulaire">
+            <form id="gameForm" action="/game/treatment" method="POST">
+                <label for="pseudo">Choisissez une lettre ou le mot : </label>
+                <input type="text" id="pseudo" name="lettre" required>
+                <button type="submit" >valider</button> 
+            </form>
+        </div>
+    </div>
 </body>
 </html>
 {{end}}

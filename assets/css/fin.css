@@ -1,0 +1,63 @@
+/* Reset styles for consistency */
+body, h1, h3, p {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9; /* Light gray background */
+    color: #333; /* Dark gray text for readability */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Centered container with a card-like style */
+.container {
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 20px 30px;
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+/* Title styling */
+h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+h1.win {
+    color: #4CAF50; /* Green for success */
+}
+
+h1.lose {
+    color: #E74C3C; /* Red for failure */
+}
+
+h3 {
+    font-size: 1.2em;
+    margin-top: 10px;
+    color: #555; /* Subtle gray for secondary text */
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 600px) {
+    .container {
+        padding: 15px 20px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    h3 {
+        font-size: 1em;
+    }
+}

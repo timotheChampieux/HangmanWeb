@@ -22,6 +22,7 @@ var (
 	lettreDejaPropose []string
 	lettrePropose     string
 	win               bool
+	message           string
 )
 
 type user struct {
@@ -114,7 +115,7 @@ func main() {
 			motCacher += motMasque[i]
 		}
 
-		data := data{user1, motAleatoire, motCacher, essaie, reussitte, lettrePropose, r.FormValue("message")}
+		data := data{user1, motAleatoire, motCacher, essaie, reussitte, lettrePropose, message}
 
 		if essaie <= 0 {
 			win = false
@@ -135,10 +136,11 @@ func main() {
 			http.Redirect(w, r, "/game", http.StatusSeeOther)
 			return
 		}
-		message := ""
+		message = ""
 		lettre := r.FormValue("lettre")
 
 		if jeu.ElementDansSlice(lettre, lettreDejaPropose) {
+
 			message = "Vous avez déja entré cette lettre !"
 		}
 
